@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html>
+	<style>
+		:root {
+			--unknown-background-color: var(--green-background-color);
+			--green-background-color: hsl(120, 100%, 83%);
+			--blue-background-color: hsl(197, 100%, 83%);
+			--red-background-color: hsl(0, 100%, 83%);
+			--purple-background-color: hsl(318, 100%, 83%);
+			--orange-background-color: hsl(41, 100%, 69%);
+			--yellow-background-color: hsl(56, 100%, 83%);
+		}
+
+		body {
+			background-color: var(--unknown-background-color);
+			height: 100%;
+			width: 100%;
+			margin: 0px;
+			padding: 0px;
+
+			display: flex;
+			flex-direction: column;
+		}
+
+		html {
+			font-family: Cantarell, sans-serif;
+			font-size: large;
+			height: 100%;
+			width: 100%;
+			margin: 0px;
+			padding: 0px;
+			/* position: relative; */
+		}
+
+		main {
+			width: 100%;
+			margin: 0px;
+			padding: 0px;
+			position: relative;
+
+			height: 100%;
+			flex-basis: 0;
+			flex-shrink: 1;
+			flex-grow: 1;
+		}
+
+		footer {
+			/* position: absolute; */
+
+			/* bottom: 0px; */
+
+			width: 100%;
+			margin: 0px;
+			padding: 0px;
+
+			flex-basis: auto;
+			flex-shrink: 0;
+			flex-grow: 0;
+		}
+
+		#Date-Tags {
+			/* background-color: aqua; */
+			position: absolute;
+			top: 0px;
+			right: 0px;
+
+			display: flex;
+			flex-direction: row-reverse;
+		}
+
+		#This-Class-Text {
+			font-size: x-large;
+
+			position: absolute;
+			top: 5vh;
+			left: 6vw;
+		}
+
+		#Class-Title {
+			font-size: 4vw;
+
+			position: absolute;
+			top: 10vh;
+			left: 6vw;
+		}
+
+		#Class-Tags {
+			font-size: 1.5vw;
+			display: block;
+
+			position: absolute;
+			top: calc(10vh + 4em);
+			left: 6vw;
+		}
+
+		.Class-Tag {
+			margin-top: 0.5em;
+		}
+
+		#Room-Name-Input {
+			width: 3em;
+		}
+
+		#News-Text {
+			position: absolute;
+
+			bottom: 1em;
+			left: 1em;
+
+			font-size: x-large;
+		}
+
+		#News {
+			background-color: rgba(0, 0, 0, 0.3);
+
+			display: flex;
+
+			overflow: hidden;
+
+			align-items: center;
+		}
+
+		#Credit {
+			position: absolute;
+
+			font-size: small;
+			text-align: center;
+			color: white;
+
+			width: 30vw;
+
+			bottom: 1em;
+			right: 1em;
+
+			background-color: rgba(0, 0, 0, 0.3);
+			padding: 1em;
+			border-radius: 1em;
+		}
+
+		img {
+			width: 100%;
+		}
+
+		.News-Item {
+			background-color: rgba(255, 255, 255, 0.6);
+			padding: 0.6em;
+			border-radius: 1em;
+			margin: 1em;
+
+			width: fit-content;
+			height: calc(100% - 3em);
+		}
+
+		.Date-Tag {
+			background-color: rgba(255, 255, 255, 0.6);
+			margin: 0.5em;
+			padding: 0.5em;
+			border-radius: 1em;
+		}
+
+		.Fullscreen-News-Item {
+			position: fixed;
+
+			color: white;
+
+			top: 0px;
+			bottom: 0px;
+			left: 0px;
+			right: 0px;
+
+			display: none;
+
+			z-index: 10;
+
+			padding: 2em;
+
+			background-color: hsl(0, 0%, 20%);
+		}
+	</style>
+
+	<head>
+		<title>Ao Tawhiti Tv</title>
+	</head>
+
+	<body>
+		<div id="Fullscreen-News-Div">
+			<!-- <div class="Fullscreen-News-Item">
+				<samp style="font-size: 5em"> Athletics Day </samp>
+				<br />
+				<samp style="font-size: 3em">
+					Thursday the 11<sup>th</sup> of March<br />
+					at some place that I can't spell.
+				</samp>
+				<br /><br />
+				<samp style="font-size: 2em">
+					<ul style="padding: 1em">
+						<li>arrange for your own transport</li>
+						<li>please take a paced morning tea and lunch</li>
+						<li>Also can you add stuff to this list?</li>
+					</ul>
+				</samp>
+			</div> -->
+		</div>
+
+		<main>
+			<span id="This-Class-Text"> Now happening: </span>
+			<span id="Class-Title"> Loading... </span>
+
+			<div id="Date-Tags">
+				<span class="Date-Tag" id="Time"> 1:29<sub>pm</sub> </span>
+				<span class="Date-Tag" id="Date"> 22<sub>th</sub> of Feb </span>
+				<span class="Date-Tag" id="Next-Class-Span">
+					10minutes until Next Class.
+				</span>
+			</div>
+
+			<div id="Credit">
+				<img
+					src="https://lms.aotawhiti.school.nz/sites/all/themes/best_responsive/images/at_logo_white.png"
+				/>
+				<span>
+					This website was created by Thomas Booker. &#169; Thomas Booker.
+				</span>
+			</div>
+
+			<span id="News-Text"> News, Events And Information: </span>
+		</main>
+		<footer id="News">
+			<!-- <div class="News-Item">
+				<samp style="font-size: xx-large"> Athletics Day </samp>
+				<br />
+				<samp style="font-size: large">
+					Thursday the 11<sup>th</sup> of March<br />
+					at some place
+				</samp>
+				<br />
+				<samp style="font-size: medium">
+					<ul style="padding: 1em">
+						<li>arrange for your own transport</li>
+						<li>please take a paced morning tea and lunch</li>
+					</ul>
+				</samp>
+			</div> -->
+			<div class="News-Item">
+				<samp
+					style="
+						font-size: xx-large;
+						text-align: center;
+						display: block;
+						margin-bottom: 0.4em;
+					"
+				>
+					Weather
+				</samp>
+				<iframe
+					id="widget-iframe"
+					height="195"
+					src="https://services.metservice.com/weather-widget/widget?params=blue|medium|portrait|days-3|modern&loc=christchurch&type=urban"
+					allowtransparency="true"
+					style="border: none; border-radius: 1em"
+				></iframe>
+			</div>
+			<div class="News-Item" id="test">
+				
+			</div>
+			<samp style="color: lightgray; font-size: x-large; margin-left: 1em">
+				No more news... Intergrashon with the school website is comming soon...
+			</samp>
+		</footer>
+	</body>
+	<script>
+		function UpdateTimeDisplay() {
+			let TimeSpan = document.getElementById("Time");
+			let DateSpan = document.getElementById("Date");
+
+			let Now = new Date(Date.now());
+
+			let DateOptions = {
+				weekday: "long",
+				year: "numeric",
+				month: "long",
+				day: "numeric",
+			};
+
+			TimeSpan.innerText = new Date(Date.now()).toLocaleTimeString();
+			DateSpan.innerText = new Date(Date.now()).toLocaleDateString(
+				"en-UK",
+				DateOptions
+			);
+		}
+
+		setInterval(UpdateTimeDisplay, 100);
+	</script>
+
+	<script>
+		// var NotificationServerConnection;
+		// function ConnectToNotificationServer() {
+		// 	// Create WebSocket connection.
+		// 	NotificationServerConnection = new WebSocket("ws://" + location.hostname + ":8924" + location.pathname);
+
+		// 	// Listen for messages
+		// 	NotificationServerConnection.addEventListener('message', function (event) {
+		// 		console.log('Message from server ', event.data);
+		// 	});
+		// }
+
+		// ConnectToNotificationServer()
+	</script>
+	<script>
+		function GetBlockColour(col, row) {
+			if (col >= 8 && col <= 10 && row >= 2 && row <= 19) return "Red";
+			if (col >= 8 && col <= 10 && row >= 21 && row <= 38) return "Green";
+			if (col >= 8 && col <= 10 && row >= 41 && row <= 60) return "Blue";
+			if (col >= 8 && col <= 10 && row >= 63 && row <= 83) return "Purple";
+			if (col >= 2 && col <= 4 && row >= 63 && row <= 82) return "Yellow";
+
+			return false;
+		}
+	</script>
+	<script>
+		var NowBlock = "";
+
+		function GetBlockNow(now) {
+			// if (RoomName == undefined) return "NoRoomNameDefined";
+
+			// if (
+			// 	TimeTableData["Red"][RoomName] == undefined &&
+			// 	TimeTableData["Blue"][RoomName] == undefined &&
+			// 	TimeTableData["Green"][RoomName] == undefined &&
+			// 	TimeTableData["Purple"][RoomName] == undefined &&
+			// 	TimeTableData["Yellow"][RoomName] == undefined
+			// )
+			// 	return "NoRoomNameDefined";
+
+			if (now.getDay() === 0) return "NoSchool";
+			if (now.getDay() === 6) return "NoSchool";
+
+			if (now.getHours() >= 15) return "EndOfSchool";
+
+			if (now.getHours() < 9) return "BeforeSchool";
+
+			if (now.getHours() < 10) return "HomeBase";
+
+			if (now.getHours() === 11 && now.getMinutes() < 20) return "MorningBreak";
+
+			if (now.getHours() === 12 && now.getMinutes() > 20) return "Lunch";
+
+			if (now.getDay() === 1) {
+				if (now.getHours() < 11) return "Red";
+				if (now.getHours() < 13) return "Yellow";
+				if (now.getHours() < 14) return "Green";
+				if (now.getHours() < 15) return "Blue";
+			}
+			if (now.getDay() === 2) {
+				if (now.getHours() < 11) return "Yellow";
+				if (now.getHours() < 13) return "Red";
+				if (now.getHours() < 14) return "Purple";
+				if (now.getHours() < 15) return "Green";
+			}
+			if (now.getDay() === 3) {
+				if (now.getHours() < 11) return "Green";
+				if (now.getHours() < 13) return "Blue";
+				if (now.getHours() < 14) return "Purple";
+				if (now.getHours() < 15) return "EndOfSchool";
+			}
+			if (now.getDay() === 4) {
+				if (now.getHours() < 11) return "Blue";
+				if (now.getHours() < 13) return "Purple";
+				if (now.getHours() < 14) return "Yellow";
+				if (now.getHours() < 15) return "Red";
+			}
+			if (now.getDay() === 5) {
+				if (now.getHours() < 11) return "HomeBase";
+				if (now.getHours() < 15) return "Orange";
+			}
+		}
+
+		setInterval(() => {
+			let now = new Date();
+
+			if (NowBlock != GetBlockNow(now)) {
+				NowBlock = GetBlockNow(now);
+				// UpdateTimeTableData();
+				UpdateClassTitle();
+			}
+
+			let NextDate = new Date(Date.now() + 10 * 60000);
+			let NextBlock = GetBlockNow(NextDate);
+			let NextClassSpan = document.getElementById("Next-Class-Span");
+			if (NextBlock !== NowBlock) {
+				NextClassSpan.style.display = "block";
+				NextClassSpan.innerText =
+					"Next up is " + GetDisplayTextFoBlock(NextBlock);
+			} else {
+				NextClassSpan.style.display = "none";
+			}
+		}, 1000);
+	</script>
+	<script>
+		function UpdateClassTitle() {
+			let ClassTitle = document.getElementById("Class-Title");
+			let body = document.querySelector("body");
+
+			// if (NowBlock !== "NoRoomNameDefined") {
+			// 	document.cookie = "RoomName=" + RoomName;
+			// }
+
+			ClassTitle.innerText = GetDisplayTextFoBlock(NowBlock);
+			body.style.backgroundColor = GetBackgroundCssColour();
+		}
+
+		function GetDisplayTextFoBlock(Block) {
+			switch (Block) {
+				case "NoRoomNameDefined":
+					return "Please enter valid room name.";
+				case "HomeBase":
+					return "Home base";
+				case "EndOfSchool":
+					return "End of school";
+				case "BeforeSchool":
+					return "Before school";
+				case "MorningBreak":
+					return "Morning break";
+				case "Lunch":
+					return "Lunch";
+				case "NoSchool":
+					return "No school today";
+				case "Orange":
+					return "Friday Hapori";
+				default:
+					return Block + " Block";
+			}
+		}
+
+		function IsBlockAColour() {
+			switch (NowBlock) {
+				case "Red":
+					return true;
+				case "Green":
+					return true;
+				case "Blue":
+					return true;
+				case "Yellow":
+					return true;
+				case "Purple":
+					return true;
+				case "Orange":
+					return true;
+				default:
+					return false;
+			}
+		}
+
+		function GetBackgroundCssColour() {
+			switch (NowBlock) {
+				case "Red":
+					return "var(--red-background-color)";
+				case "Green":
+					return "var(--green-background-color)";
+				case "Blue":
+					return "var(--blue-background-color)";
+				case "Yellow":
+					return "var(--yellow-background-color)";
+				case "Purple":
+					return "var(--purple-background-color)";
+				case "Orange":
+					return "var(--orange-background-color)";
+				default:
+					return "var(--unknown-background-color)";
+			}
+		}
+	</script>
+	<script>
+		var CurrentFullscreenNewsNumber = -1;
+
+		// function UpdateFullscreenNews() {
+		// 	let FullscreenNewsItems = document.getElementsByClassName(
+		// 		"Fullscreen-News-Item"
+		// 	);
+
+		// 	for (index in FullscreenNewsItems) {
+		// 		try {
+		// 			// console.	log(FullscreenNewsItems[index])
+		// 			FullscreenNewsItems[index].style.display = "none";
+		// 		} catch (e) {}
+		// 	}
+
+		// 	if (
+		// 		NowBlock === "MorningBreak" ||
+		// 		NowBlock === "HomeBase" ||
+		// 		NowBlock === "Lunch"
+		// 	) {
+		// 		try {
+		// 			// console.log(CurrentFullscreenNewsNumber)
+		// 			FullscreenNewsItems[CurrentFullscreenNewsNumber].style.display =
+		// 				"block";
+		// 		} catch (e) {}
+		// 	}
+		// }
+
+		// setInterval(UpdateFullscreenNews, 1000);
+	</script>
+	<script>
+		// function CycleFullscreenNews() {
+		// 	let FullscreenNewsItems = document.getElementsByClassName(
+		// 		"Fullscreen-News-Item"
+		// 	);
+
+		// 	if (CurrentFullscreenNewsNumber > FullscreenNewsItems.length) {
+		// 		CurrentFullscreenNewsNumber = -1;
+		// 	} else {
+		// 		CurrentFullscreenNewsNumber++;
+		// 	}
+		// }
+
+		// setInterval(CycleFullscreenNews, 30000);
+	</script>
+	<script>
+		const RSS_NewsURI = "https://aotawhiti.school.nz/feed"
+		
+		// fetch(RSS_NewsURI)
+		// 	.then(response => response.text())
+		// 	.then(str => new window.DOMParser().parseFromString(str, "text/xml"))
+		// 	.then(data => {
+		// 		// document.getElementById("test").innerText = data
+		// 		const items = data.querySelectorAll("item");
+		// 		let html = ``;
+		// 		items.forEach(el => {
+		// 			html += `
+		// 				<div class="News-Item">
+		// 					<h2>
+		// 						${el.querySelector("title").innerHTML}
+		// 					</h2>
+		// 					<span>${el.querySelector("description").innerHTML.replaceAll("<![CDATA[", "").replaceAll("[&#8230;]]]>", "")}</span>
+		// 				</div>
+		// 			`;
+		// 		})
+		// 		document.getElementById("test").innerHTML = html
+		// 	})
+
+		fetch(RSS_NewsURI)
+			.then(response => response.text())
+			.then(str => new window.DOMParser().parseFromString(str, "text/xml"))
+			.then(data => {
+				// document.getElementById("test").innerText = data
+				const items = data.querySelectorAll("item");
+				el = items[0]
+				document.getElementById("test").innerHTML = `
+						<h2>
+							${el.querySelector("title").innerHTML}
+						</h2>
+						<span>${el.querySelector("description").innerHTML.replaceAll("<![CDATA[", "").replaceAll("]]>", "")}</span>
+					`;
+			})
+	</script>
+</html>
